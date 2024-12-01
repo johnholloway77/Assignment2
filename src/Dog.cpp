@@ -3,8 +3,9 @@
 // Copyright (c) [2024] John Holloway. All Rights Reserved.
 //
 
-#include <iostream>
 #include "../include/Dog.h"
+
+#include <iostream>
 
 std::string Dog::getColour() const {
   return colourToString(colour_);

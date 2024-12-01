@@ -8,37 +8,38 @@
 
 #include "Reptile.h"
 
-#define COLOURS \
-  X(Green)      \
-  X(Brown)   \
-  X(Gray)       \
-  X(Onyx)      \
-  X(Cinnamon)   \
+#define SNAKE_COLOURS \
+  X(Green)            \
+  X(Brown)            \
+  X(Gray)             \
+  X(Onyx)             \
+  X(Cinnamon)         \
   X(Red)
 
-#define PATTERNS  \
-  X(Striped)      \
-  X(Reticulated)  \
-  X(Solid)        \
-  X(Checkerboard) \
+#define SNAKE_PATTERNS \
+  X(Striped)           \
+  X(Reticulated)       \
+  X(Solid)             \
+  X(Checkerboard)      \
   X(Motted)
 
-class Snake: public Reptile<Snake>{
+class Snake : public Reptile<Snake> {
  public:
-
-  enum class Colour{
+  enum class Colour {
 #define X(name) name,
-    COLOURS
+    SNAKE_COLOURS
 #undef X
   };
 
-  enum class Pattern{
+  enum class Pattern {
 #define X(name) name,
-    PATTERNS
+    SNAKE_PATTERNS
 #undef X
   };
 
-  Snake(std::string name, std::string breed, int birthYear, Reptile::Order order, Snake::Colour colour, Snake::Pattern pattern): Reptile<Snake>(name, breed, birthYear, order){
+  Snake(std::string name, std::string breed, int birthYear,
+        Reptile::Order order, Snake::Colour colour, Snake::Pattern pattern)
+      : Reptile<Snake>(name, breed, birthYear, order) {
     this->colour_ = colour;
     this->pattern_ = pattern;
   }
@@ -51,27 +52,31 @@ class Snake: public Reptile<Snake>{
   Colour colour_;
   Pattern pattern_;
 
-
   static std::string colourToString(Colour colour) {
     switch (colour) {
-#define X(name) case Colour::name: return #name;
-      COLOURS
+#define X(name)      \
+  case Colour::name: \
+    return #name;
+      SNAKE_COLOURS
 #undef X
 
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
 
-  static std::string patternToString(Pattern pattern){
+  static std::string patternToString(Pattern pattern) {
     switch (pattern) {
-#define X(name) case Pattern::name: return #name;
-      PATTERNS
+#define X(name)       \
+  case Pattern::name: \
+    return #name;
+      SNAKE_PATTERNS
 #undef X
 
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
-
 };
 
-#endif //ASSIGN2_INCLUDE_SNAKE_H_
+#endif  // ASSIGN2_INCLUDE_SNAKE_H_

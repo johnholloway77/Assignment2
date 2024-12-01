@@ -8,38 +8,39 @@
 
 #include "Mammal.h"
 
-#define COLOURS \
-  X(Black)      \
-  X(Chocolate)   \
-  X(Gray)       \
-  X(Cream)      \
-  X(Cinnamon)   \
+#define CAT_COLOURS \
+  X(Black)          \
+  X(Chocolate)      \
+  X(Gray)           \
+  X(Cream)          \
+  X(Cinnamon)       \
   X(Red)
 
-#define MARKINGS \
-  X(Brindle)     \
-  X(Spotted)     \
-  X(Tortoise)    \
-  X(Calico)      \
-  X(Striped)    \
+#define CAT_MARKINGS \
+  X(Brindle)         \
+  X(Spotted)         \
+  X(Tortoise)        \
+  X(Calico)          \
+  X(Striped)         \
   X(Tabby)
 
-  class Cat: public Mammal<Cat>{
+class Cat : public Mammal<Cat> {
  public:
-
-  enum class Colour{
+  enum class Colour {
 #define X(name) name,
-    COLOURS
+    CAT_COLOURS
 #undef X
   };
 
-  enum class Marking{
+  enum class Marking {
 #define X(name) name,
-    MARKINGS
+    CAT_MARKINGS
 #undef X
   };
 
-  Cat(std::string name, std::string breed, int birthYear, Cat::Colour colour, Cat::Marking marking): Mammal<Cat>(name, breed, birthYear){
+  Cat(std::string name, std::string breed, int birthYear, Cat::Colour colour,
+      Cat::Marking marking)
+      : Mammal<Cat>(name, breed, birthYear) {
     this->colour_ = colour;
     this->marking_ = marking;
   };
@@ -47,33 +48,35 @@
   std::string getColour() const override;
   std::string getMarking() const override;
 
-
  private:
-
   Colour colour_;
   Marking marking_;
 
-    static std::string markingToString(Marking marking){
-      switch (marking) {
-#define X(name) case Marking::name: return #name;
-        MARKINGS
+  static std::string markingToString(Marking marking) {
+    switch (marking) {
+#define X(name)       \
+  case Marking::name: \
+    return #name;
+      CAT_MARKINGS
 #undef X
 
-        default: return "Unknown";
-      }
-    };
-
-
-  static std::string colourToString(Colour colour) {
-    switch (colour) {
-#define X(name) case Colour::name: return #name;
-      COLOURS
-#undef X
-
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
 
+  static std::string colourToString(Colour colour) {
+    switch (colour) {
+#define X(name)      \
+  case Colour::name: \
+    return #name;
+      CAT_COLOURS
+#undef X
+
+      default:
+        return "Unknown";
+    }
+  };
 };
 
-#endif //ASSIGN2_INCLUDE_CAT_H_
+#endif  // ASSIGN2_INCLUDE_CAT_H_

@@ -3,8 +3,9 @@
 // Copyright (c) [2024] John Holloway. All Rights Reserved.
 //
 
-#include <iostream>
 #include "../include/Cat.h"
+
+#include <iostream>
 
 std::string Cat::getColour() const {
   return colourToString(colour_);

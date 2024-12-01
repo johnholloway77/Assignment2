@@ -6,36 +6,36 @@
 #ifndef ASSIGN2_INCLUDE_RABBIT_H_
 #define ASSIGN2_INCLUDE_RABBIT_H_
 
-
 #include "Mammal.h"
 
-#define COLOURS \
-  X(Black)      \
-  X(Brown)      \
-  X(Gray)       \
+#define RABBIT_COLOURS \
+  X(Black)             \
+  X(Brown)             \
+  X(Gray)              \
   X(White)
 
-#define MARKINGS \
-  X(Solid)       \
-  X(Spotted)     \
-  X(Patches)     \
+#define RABBIT_MARKINGS \
+  X(Solid)              \
+  X(Spotted)            \
+  X(Patches)
 
-class Rabbit: public Mammal<Rabbit> {
+class Rabbit : public Mammal<Rabbit> {
  public:
-
-  enum class Colour{
+  enum class Colour {
 #define X(name) name,
-    COLOURS
+    RABBIT_COLOURS
 #undef X
   };
 
-  enum class Marking{
+  enum class Marking {
 #define X(name) name,
-    MARKINGS
+    RABBIT_MARKINGS
 #undef X
   };
 
-  Rabbit(std::string name, std::string breed, int birthYear, Rabbit::Colour colour, Rabbit::Marking marking): Mammal<Rabbit>(name, breed, birthYear){
+  Rabbit(std::string name, std::string breed, int birthYear,
+         Rabbit::Colour colour, Rabbit::Marking marking)
+      : Mammal<Rabbit>(name, breed, birthYear) {
     this->colour_ = colour;
     this->marking_ = marking;
   };
@@ -44,30 +44,34 @@ class Rabbit: public Mammal<Rabbit> {
   std::string getMarking() const override;
 
  private:
-
   Colour colour_;
   Marking marking_;
 
-  static std::string markingToString(Marking marking){
+  static std::string markingToString(Marking marking) {
     switch (marking) {
-#define X(name) case Marking::name: return #name;
-      MARKINGS
+#define X(name)       \
+  case Marking::name: \
+    return #name;
+      RABBIT_MARKINGS
 #undef X
 
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
 
-
   static std::string colourToString(Colour colour) {
     switch (colour) {
-#define X(name) case Colour::name: return #name;
-      COLOURS
+#define X(name)      \
+  case Colour::name: \
+    return #name;
+      RABBIT_COLOURS
 #undef X
 
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
 };
 
-#endif //ASSIGN2_INCLUDE_RABBIT_H_
+#endif  // ASSIGN2_INCLUDE_RABBIT_H_

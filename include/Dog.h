@@ -8,40 +8,39 @@
 
 #include "Mammal.h"
 
-#define COLOURS \
-  X(Black)      \
-  X(Chocolate)  \
-  X(Gray)       \
-  X(Gold)       \
-  X(White)      \
+#define DOG_COLOURS \
+  X(Black)          \
+  X(Chocolate)      \
+  X(Gray)           \
+  X(Gold)           \
+  X(White)          \
   X(Yellow)
 
-#define MARKINGS \
-  X(Brindle)     \
-  X(Spotted)     \
-  X(TwoColour)  \
-  X(Merle)       \
-  X(Tricolour)   \
+#define DOG_MARKINGS \
+  X(Brindle)         \
+  X(Spotted)         \
+  X(TwoColour)       \
+  X(Merle)           \
+  X(Tricolour)       \
   X(Tudexo)
 
-class Dog: public Mammal<Dog>{
-
+class Dog : public Mammal<Dog> {
  public:
-
-
-  enum class Colour{
+  enum class Colour {
 #define X(name) name,
-    COLOURS
+    DOG_COLOURS
 #undef X
   };
 
-  enum class Marking{
+  enum class Marking {
 #define X(name) name,
-    MARKINGS
+    DOG_MARKINGS
 #undef X
   };
 
-  Dog(std::string name, std::string breed, int birthYear, Dog::Colour colour, Dog::Marking marking): Mammal<Dog>(name, breed, birthYear){
+  Dog(std::string name, std::string breed, int birthYear, Dog::Colour colour,
+      Dog::Marking marking)
+      : Mammal<Dog>(name, breed, birthYear) {
     this->colour_ = colour;
     this->marking_ = marking;
   };
@@ -49,34 +48,35 @@ class Dog: public Mammal<Dog>{
   std::string getColour() const override;
   std::string getMarking() const override;
 
-
-
  private:
-
-
   Colour colour_;
   Marking marking_;
 
-  static std::string markingToString(Marking marking){
+  static std::string markingToString(Marking marking) {
     switch (marking) {
-#define X(name) case Marking::name: return #name;
-      MARKINGS
+#define X(name)       \
+  case Marking::name: \
+    return #name;
+      DOG_MARKINGS
 #undef X
 
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
 
   static std::string colourToString(Colour colour) {
     switch (colour) {
-#define X(name) case Colour::name: return #name;
-      COLOURS
+#define X(name)      \
+  case Colour::name: \
+    return #name;
+      DOG_COLOURS
 #undef X
 
-      default: return "Unknown";
+      default:
+        return "Unknown";
     }
   };
-
 };
 
-#endif //ASSIGN2_INCLUDE_DOG_H_
+#endif  // ASSIGN2_INCLUDE_DOG_H_

@@ -3,10 +3,11 @@
 // Copyright (c) [2024] John Holloway. All Rights Reserved.
 //
 
-#include <iostream>
 #include "../include/Snake.h"
 
-std::string Snake::getOrder(){
+#include <iostream>
+
+std::string Snake::getOrder() {
   return orderToString(order_);
 };
 

@@ -10,12 +10,12 @@
 
 class BaseAnimal {
  protected:
-
   std::string name_;
   std::string breed_;
   int birthYear_;
 
-  BaseAnimal(const std::string& name, const std::string& breed, int birthYear): name_(name), breed_(breed), birthYear_(birthYear){};
+  BaseAnimal(const std::string& name, const std::string& breed, int birthYear)
+      : name_(name), breed_(breed), birthYear_(birthYear){};
 
  public:
   virtual ~BaseAnimal() = default;
@@ -23,4 +23,4 @@ class BaseAnimal {
   virtual std::string getColour() const = 0;
 };
 
-#endif //ASSIGN2_INCLUDE_BASEANIMAL_H_
+#endif  // ASSIGN2_INCLUDE_BASEANIMAL_H_

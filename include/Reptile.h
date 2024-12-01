@@ -3,41 +3,38 @@
 // Copyright (c) [2024] John Holloway. All Rights Reserved.
 //
 
-
 #include <iostream>
+
 #include "BaseAnimal.h"
 
-#define ORDERS    \
-  X(Testudines)   \
-  X(Crocodilians) \
-  X(Squamata)     \
+#define REPTILE_ORDERS \
+  X(Testudines)        \
+  X(Crocodilians)      \
+  X(Squamata)          \
   X(Rhynchocephalia)
 
-
-  template <typename Child>
-class Reptile: public BaseAnimal{
-
+template <typename Child>
+class Reptile : public BaseAnimal {
  public:
-
-  enum class Colour{};
-  enum class Order{
+  enum class Colour {};
+  enum class Order {
 #define X(name) name,
-    ORDERS
+    REPTILE_ORDERS
 #undef X
   };
 
-  std::string getOrder(){
+  std::string getOrder() {
     return Child::getOrder();
   };
 
-  virtual std::string getColour() const override = 0 ;
-  virtual std::string getPattern() const  = 0 ;
+  virtual std::string getColour() const override = 0;
+  virtual std::string getPattern() const = 0;
 
   std::string getName() const override {
     return name_;
   }
 
-  std::string getBreed() const{
+  std::string getBreed() const {
     return breed_;
   }
   int getBirthYear() const {
@@ -45,24 +42,22 @@ class Reptile: public BaseAnimal{
   }
 
  protected:
-
-  static std::string orderToString(Order order){
-    switch(order){
-#define X(name) case Order::name: return #name;
-      ORDERS
+  static std::string orderToString(Order order) {
+    switch (order) {
+#define X(name)     \
+  case Order::name: \
+    return #name;
+      REPTILE_ORDERS
 #undef X
     }
   }
 
-  //Colour colour;
+  // Colour colour;
   Order order_;
 
-  Reptile(const std::string& name, const std::string& breed, int birthYear, Reptile::Order order): BaseAnimal(name, breed, birthYear){
+  Reptile(const std::string& name, const std::string& breed, int birthYear,
+          Reptile::Order order)
+      : BaseAnimal(name, breed, birthYear) {
     this->order_ = order;
   };
-
-
-
-
-
 };
