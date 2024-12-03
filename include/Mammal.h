@@ -27,25 +27,14 @@ class Mammal : public BaseAnimal {
     return Child::markingToString(marking);
   }
 
+  virtual std::string getColour() const override = 0;
+  virtual std::string getMarking() const = 0;
+
  public:
   Mammal(const std::string& name, const std::string& breed, int birthYear)
       : BaseAnimal(name, breed, birthYear){};
 
-  // virtual ~Mammal() = default;
-
-  std::string getName() const override {
-    return name_;
-  }
-
-  std::string getBreed() const {
-    return breed_;
-  }
-  int getBirthYear() const {
-    return birthYear_;
-  }
-
-  virtual std::string getColour() const override = 0;
-  virtual std::string getMarking() const = 0;
+  ~Mammal() = default;
 };
 
 #endif  // ASSIGN2_INCLUDE_MAMMAL_H_

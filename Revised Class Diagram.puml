@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/class-diagram
+left to right direction
+
+class Clients {
+    -std::unordered_map<int, Client *> clientsByPhoneNumber
+
+    +addClient(Client): void
+    +findClient(Client*): Client*
+    +getClient(int phoneNumber): Client*
+}
+
+class Client{
+    -int phoneNumber
+    -std::string name
+    -std::unordered_map<std::string, Animal*> animalsByName;
+
+    +findAnimal(Animal*): Animal*
+    +getName(): std::string
+    +getPhoneNumber(): int
+    +getAnimal(std::string name): Animal*
+    +addAnimal(Animal* animal): void
+
+}
+
+
+class Animal{
+    #enum class Colour {BLACK, CHOCOLATE, GRAY}
+    #enum class Marking {BRINDLE, SPOTTED}
+
+    #std::string name
+    #std::string breed
+    #int birthYear
+    #Colour colour
+    #Marking marking
+
+    + getName(): std::string
+    + getBreed(): std::string
+    + getBirthYear(): int
+    <<virtual>> getColour(): std::string
+    <<virtual>> getMarking(): std::string
+    <<virtual>> markingToString(Marking marking): std::string
+    <<virtual>> colourToString(Colour colour): std::string
+}
+
+Clients "1" *-- "many" Client
+Client "1" *-- "many" Animal
+
+
+class Cat{
+    -enum class Colour {CREAM, CINNAMON, RED}
+    -enum class Marking {TORTOISE, CALICO, STRIPED, TABBY}
+    -static markingToString(Marking marking): std::string
+    -static colourToString(Colour colour): std::string
+    +Cat(std::string name, std::string breed, Colour colour, Marking marking, int birthYear)
+    <<override>> getColour(): std::string
+    <<override>> getMarking(): std::string
+}
+
+class Dog{
+    -enum class Colour {GOLD, WHITE, YELLOW}
+    -enum class Marking {TWOCOLOUR, MERLE, TRICOLOR, TUXEDO}
+    -static markingToString(Marking marking): std::string
+    -static colourToString(Colour colour): std::string
+    +Dog(std::string name, std::string breed, Colour colour, Marking marking, int birthYear)
+    <<override>> getColour(): std::string
+    <<override>> getMarking(): std::string
+}
+
+Animal <|-- Cat
+Animal <|-- Dog
+
+@enduml

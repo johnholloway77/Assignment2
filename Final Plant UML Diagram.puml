@@ -1,0 +1,156 @@
+@startuml
+
+skinparam legendBorderThickness 0
+skinparam legendBackgroundColor White
+skinparam legendFontSize 18
+skinparam legendPadding 8
+
+legend top left
+
+**Legend**
+
+| **Symbol**                     |   | **Description**              |
+|                                |   |                             |
+| //methodName()//               |   | Abstract Method             |
+| __methodName()__               |   | Static Method               |
+| <img:https://cdn-0.plantuml.com/package-private-field.png> fieldName    |   | Private Field             |
+| <img:https://cdn-0.plantuml.com/private-method.png> methodName()        |   | Private Method            |
+| <img:https://cdn-0.plantuml.com/protected-field.png> fieldName          |   | Protected Field           |
+| <img:https://cdn-0.plantuml.com/protected-method.png> methodName()      |   | Protected Method          |
+| <img:https://cdn-0.plantuml.com/public-field.png> fieldName             |   | Public Field              |
+| <img:https://cdn-0.plantuml.com/public-method.png> methodName()         |   | Public Method             |
+
+**John Holloway**
+**CPSC 2720 Fall 2024**
+
+end legend
+
+' BaseAnimal class
+class BaseAnimal {
+    - string name_ : string
+    - string breed_ : string
+    - birthYear_ : int
+    + getBirthYear() const: int
+    + string getBreed() : const string&
+    + string getName() : const string&
+    # {abstract} getColour(): const string
+
+}
+
+' Mammal class (templated)
+class Mammal<T> {
+    {static} colourToString(Colour colour) : string
+    {static} markingToString(Marking marking) : string
+    # Mammal(string name, string breed, int birthYear)
+    # {abstract}  getColour() : string
+    # {abstract}  getMarking() : string
+}
+
+BaseAnimal <|-- Mammal
+
+' Cat class
+class Cat {
+    {static} std::string colourToString(Colour colour)
+    {static} std::string markingToString(Marking marking)
+
+    + enum Colour { Black, Chocolate, Gray, Cream, Cinnamon, Red }
+    + enum Marking { Brindle, Spotted, Tortoise, Calico, Striped, Tabby }
+
+    + Cat(string name, string breed, int birthYear, Colour colour, Marking marking)
+    + string getColour() const
+    + string getMarking() const
+}
+
+Mammal <|-- Cat
+
+' Dog class
+class Dog {
+    {static} std::string colourToString(Colour colour)
+    {static} std::string markingToString(Marking marking)
+
+    + enum Colour { Black, Chocolate, Gray, Gold, White, Yellow }
+    + enum Marking { Brindle, Spotted, TwoColour, Merle, Tricolour, Tudexo }
+
+    + Dog(string name, string breed, int birthYear, Colour colour, Marking marking)
+    + string getColour() const
+    + string getMarking() const
+}
+
+Mammal <|-- Dog
+
+' Rabbit class
+class Rabbit {
+    {static} std::string colourToString(Colour colour)
+    {static} std::string markingToString(Marking marking)
+
+    + enum Colour { Black, Brown, Gray, White }
+    + enum Marking { Solid, Spotted, Patches }
+
+    + Rabbit(string name, string breed, int birthYear, Colour colour, Marking marking)
+    + string getColour() const
+    + string getMarking() const
+}
+
+Mammal <|-- Rabbit
+
+' Reptile class (templated)
+class Reptile<T> {
+     {static} std::string orderToString(Order order)
+
+    + enum Order { Testudines, Crocodilians, Squamata, Rhynchocephalia }
+    # Order order_
+
+    # Reptile(string name, string breed, int birthYear, Order order)
+    # string getOrder()
+    # {abstract} string getColour()
+    # {abstract} string getPattern()
+}
+
+BaseAnimal <|-- Reptile
+
+' Snake class
+class Snake {
+      {static} std::string colourToString(Colour colour)
+      {static} std::string patternToString(Pattern pattern)
+
+
+
+    + enum Colour { Green, Brown, Gray, Onyx, Cinnamon, Red }
+    + enum Pattern { Striped, Reticulated, Solid, Checkerboard, Motted }
+    -Colour colour_
+    -Pattern pattern_
+    +Snake(string name, string breed, int birthYear, Reptile::Order order, Colour colour, Pattern pattern)
+    +string getOrder()
+    +string getColour() const
+    +string getPattern() const
+}
+
+Reptile <|-- Snake
+
+' Client class
+class Client {
+    - int phoneNumber
+    - string name
+    - unordered_map<string, unique_ptr<BaseAnimal>> animalsByName
+    + Client(string name, int phoneNumber)
+    + void addAnimal(unique_ptr<BaseAnimal> animal)
+    + BaseAnimal& getAnimal(const string& name)
+    + string getName()
+    + int getPhoneNumber()
+}
+
+' Clients class
+class Clients {
+    - unordered_map<int, Client*> clientsByPhoneNumber
+    + void addClient(Client* client)
+    + Client* getClient(int phoneNumber)
+    + Client* findClient(Client*)
+}
+
+
+Clients "1" *-- "many" Client
+Client "1" *-- "many" BaseAnimal
+
+
+
+@enduml

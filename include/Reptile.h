@@ -23,24 +23,6 @@ class Reptile : public BaseAnimal {
 #undef X
   };
 
-  std::string getOrder() {
-    return Child::getOrder();
-  };
-
-  virtual std::string getColour() const override = 0;
-  virtual std::string getPattern() const = 0;
-
-  std::string getName() const override {
-    return name_;
-  }
-
-  std::string getBreed() const {
-    return breed_;
-  }
-  int getBirthYear() const {
-    return birthYear_;
-  }
-
  protected:
   static std::string orderToString(Order order) {
     switch (order) {
@@ -49,6 +31,8 @@ class Reptile : public BaseAnimal {
     return #name;
       REPTILE_ORDERS
 #undef X
+      default:
+        return "Unknown";
     }
   }
 
@@ -60,4 +44,12 @@ class Reptile : public BaseAnimal {
       : BaseAnimal(name, breed, birthYear) {
     this->order_ = order;
   };
+  ~Reptile() = default;
+
+  std::string getOrder() {
+    return Child::getOrder();
+  };
+
+  virtual std::string getColour() const override = 0;
+  virtual std::string getPattern() const = 0;
 };
