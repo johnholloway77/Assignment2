@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include "../include/Snake.h"
 
-TEST(SnakeTest, ConstructorTest){
+TEST(SnakeTest, ConstructorTest) {
 
     auto s = std::make_unique<Snake>(
             "Slithers", "python", 1999, Snake::Order::Squamata, Snake::Colour::Green,
