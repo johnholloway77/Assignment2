@@ -25,58 +25,60 @@
   X(Tabby)
 
 class Cat : public Mammal<Cat> {
- public:
-  enum class Colour {
+public:
+    enum class Colour {
 #define X(name) name,
-    CAT_COLOURS
+        CAT_COLOURS
 #undef X
-  };
+    };
 
-  enum class Marking {
+    enum class Marking {
 #define X(name) name,
-    CAT_MARKINGS
+        CAT_MARKINGS
 #undef X
-  };
+    };
 
-  Cat(std::string name, std::string breed, int birthYear, Cat::Colour colour,
-      Cat::Marking marking)
-      : Mammal<Cat>(name, breed, birthYear) {
-    this->colour_ = colour;
-    this->marking_ = marking;
-  };
+    Cat(std::string name, std::string breed, int birthYear, Cat::Colour colour,
+        Cat::Marking marking)
+            : Mammal<Cat>(name, breed, birthYear) {
+        this->colour_ = colour;
+        this->marking_ = marking;
+    };
 
-  std::string getColour() const override;
-  std::string getMarking() const override;
+//  std::string getColour() const override;
+//  std::string getMarking() const override;
 
- private:
-  Colour colour_;
-  Marking marking_;
+private:
+    friend class Mammal<Cat>;
 
-  static std::string markingToString(Marking marking) {
-    switch (marking) {
+    Colour colour_;
+    Marking marking_;
+
+    static std::string markingToString(Marking marking) {
+        switch (marking) {
 #define X(name)       \
   case Marking::name: \
     return #name;
-      CAT_MARKINGS
+            CAT_MARKINGS
 #undef X
 
-      default:
-        return "Unknown";
-    }
-  };
+            default:
+                return "Unknown";
+        }
+    };
 
-  static std::string colourToString(Colour colour) {
-    switch (colour) {
+    static std::string colourToString(Colour colour) {
+        switch (colour) {
 #define X(name)      \
   case Colour::name: \
     return #name;
-      CAT_COLOURS
+            CAT_COLOURS
 #undef X
 
-      default:
-        return "Unknown";
-    }
-  };
+            default:
+                return "Unknown";
+        }
+    };
 };
 
 #endif  // ASSIGN2_INCLUDE_CAT_H_

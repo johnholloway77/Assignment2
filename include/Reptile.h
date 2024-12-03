@@ -13,43 +13,60 @@
   X(Squamata)          \
   X(Rhynchocephalia)
 
-template <typename Child>
+template<typename Child>
 class Reptile : public BaseAnimal {
- public:
-  enum class Colour {};
-  enum class Order {
-#define X(name) name,
-    REPTILE_ORDERS
-#undef X
-  };
 
- protected:
-  static std::string orderToString(Order order) {
-    switch (order) {
+public:
+    enum class Colour {
+    };
+    enum class Order {
+#define X(name) name,
+        REPTILE_ORDERS
+#undef X
+    };
+
+    std::string getColour() const {
+        const Child *child = static_cast<const Child *>(this);
+        return Child::colourToString(child->colour_);
+    }
+
+    std::string getPattern() const {
+        const Child *child = static_cast<const Child *>(this);
+        return Child::patternToString(child->pattern_);
+    }
+
+    std::string getOrder() const {
+        return orderToString(order_);
+    }
+
+protected:
+    static std::string orderToString(Order order) {
+        switch (order) {
 #define X(name)     \
   case Order::name: \
     return #name;
-      REPTILE_ORDERS
+            REPTILE_ORDERS
 #undef X
-      default:
-        return "Unknown";
+            default:
+                return "Unknown";
+        }
     }
-  }
 
-  // Colour colour;
-  Order order_;
+    // Colour colour;
+    Order order_;
 
-  Reptile(const std::string& name, const std::string& breed, int birthYear,
-          Reptile::Order order)
-      : BaseAnimal(name, breed, birthYear) {
-    this->order_ = order;
-  };
-  ~Reptile() = default;
+    Reptile(const std::string &name, const std::string &breed, int birthYear,
+            Reptile::Order order)
+            : BaseAnimal(name, breed, birthYear) {
+        this->order_ = order;
+    };
 
-  std::string getOrder() {
-    return Child::getOrder();
-  };
+    ~Reptile() = default;
 
-  virtual std::string getColour() const override = 0;
-  virtual std::string getPattern() const = 0;
+//    std::string getOrder() {
+//        return Child::getOrder();
+//    };
+
+    //virtual std::string getColour() const override = 0;
+    //virtual std::string getPattern() const = 0;
 };

@@ -25,58 +25,60 @@
   X(Tudexo)
 
 class Dog : public Mammal<Dog> {
- public:
-  enum class Colour {
+public:
+    enum class Colour {
 #define X(name) name,
-    DOG_COLOURS
+        DOG_COLOURS
 #undef X
-  };
+    };
 
-  enum class Marking {
+    enum class Marking {
 #define X(name) name,
-    DOG_MARKINGS
+        DOG_MARKINGS
 #undef X
-  };
+    };
 
-  Dog(std::string name, std::string breed, int birthYear, Dog::Colour colour,
-      Dog::Marking marking)
-      : Mammal<Dog>(name, breed, birthYear) {
-    this->colour_ = colour;
-    this->marking_ = marking;
-  };
+    Dog(std::string name, std::string breed, int birthYear, Dog::Colour colour,
+        Dog::Marking marking)
+            : Mammal<Dog>(name, breed, birthYear) {
+        this->colour_ = colour;
+        this->marking_ = marking;
+    };
 
-  std::string getColour() const override;
-  std::string getMarking() const override;
+//  std::string getColour() const override;
+//  std::string getMarking() const override;
 
- private:
-  Colour colour_;
-  Marking marking_;
+private:
+    friend class Mammal<Dog>;
 
-  static std::string markingToString(Marking marking) {
-    switch (marking) {
+    Colour colour_;
+    Marking marking_;
+
+    static std::string markingToString(Marking marking) {
+        switch (marking) {
 #define X(name)       \
   case Marking::name: \
     return #name;
-      DOG_MARKINGS
+            DOG_MARKINGS
 #undef X
 
-      default:
-        return "Unknown";
-    }
-  };
+            default:
+                return "Unknown";
+        }
+    };
 
-  static std::string colourToString(Colour colour) {
-    switch (colour) {
+    static std::string colourToString(Colour colour) {
+        switch (colour) {
 #define X(name)      \
   case Colour::name: \
     return #name;
-      DOG_COLOURS
+            DOG_COLOURS
 #undef X
 
-      default:
-        return "Unknown";
-    }
-  };
+            default:
+                return "Unknown";
+        }
+    };
 };
 
 #endif  // ASSIGN2_INCLUDE_DOG_H_
