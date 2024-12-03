@@ -25,7 +25,7 @@ BaseAnimal& Client::getAnimal(const std::string& animalName) {
   }
 }
 
-std::string Client::getName() {
+const std::string& Client::getName() const {
   return name;
 }
 

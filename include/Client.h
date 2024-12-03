@@ -22,7 +22,7 @@ class Client {
 
   void addAnimal(std::unique_ptr<BaseAnimal> animal);
   BaseAnimal& getAnimal(const std::string& name);
-  std::string getName();
+  const std::string& getName() const;
   int getPhoneNumber();
 };
 

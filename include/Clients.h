@@ -12,12 +12,12 @@
 
 class Clients {
  private:
-  std::unordered_map<int, Client*> clientsByPhoneNumber;
+  std::unordered_map<int, std::unique_ptr<Client>> clientsByPhoneNumber;
 
  public:
-  void addClient(Client* client);
-  Client* getClient(int phoneNumber);
-  Client* findClient(Client*);
+  void addClient(std::unique_ptr<Client> client);
+  Client& getClient(int phoneNumber);
+  Client& findClient(Client*);
 };
 
 #endif  // ASSIGN2_INCLUDE_CLIENTS_H_
