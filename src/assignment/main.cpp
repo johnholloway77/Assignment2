@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "include/Cat.h"
-#include "include/Client.h"
-#include "include/Dog.h"
-#include "include/Rabbit.h"
-#include "include/Snake.h"
+#include "../../include/Cat.h"
+#include "../../include/Client.h"
+#include "../../include/Dog.h"
+#include "../../include/Rabbit.h"
+#include "../../include/Snake.h"
 
 int main() {
     std::unique_ptr<Client> timmy = std::make_unique<Client>("Timmy", 1234567890);
