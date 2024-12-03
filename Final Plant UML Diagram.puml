@@ -50,68 +50,68 @@ BaseAnimal <|-- Mammal
 
 ' Cat class
 class Cat {
-    {static} std::string colourToString(Colour colour)
-    {static} std::string markingToString(Marking marking)
+    {static}  colourToString(Colour colour) : string
+    {static} markingToString(Marking marking) : string
 
     + enum Colour { Black, Chocolate, Gray, Cream, Cinnamon, Red }
     + enum Marking { Brindle, Spotted, Tortoise, Calico, Striped, Tabby }
 
     + Cat(string name, string breed, int birthYear, Colour colour, Marking marking)
-    + string getColour() const
-    + string getMarking() const
+    + getColour() : string
+    + getMarking(): string
 }
 
 Mammal <|-- Cat
 
 ' Dog class
 class Dog {
-    {static} std::string colourToString(Colour colour)
-    {static} std::string markingToString(Marking marking)
+    {static} colourToString(Colour colour) : string
+    {static} markingToString(Marking marking) : string
 
     + enum Colour { Black, Chocolate, Gray, Gold, White, Yellow }
     + enum Marking { Brindle, Spotted, TwoColour, Merle, Tricolour, Tudexo }
 
     + Dog(string name, string breed, int birthYear, Colour colour, Marking marking)
-    + string getColour() const
-    + string getMarking() const
+    + getColour() : string
+    + getMarking() : string
 }
 
 Mammal <|-- Dog
 
 ' Rabbit class
 class Rabbit {
-    {static} std::string colourToString(Colour colour)
-    {static} std::string markingToString(Marking marking)
+    {static} colourToString(Colour colour) : string
+    {static} markingToString(Marking marking) : string
 
     + enum Colour { Black, Brown, Gray, White }
     + enum Marking { Solid, Spotted, Patches }
 
     + Rabbit(string name, string breed, int birthYear, Colour colour, Marking marking)
-    + string getColour() const
-    + string getMarking() const
+    + getColour(): string
+    + getMarking(): string
 }
 
 Mammal <|-- Rabbit
 
 ' Reptile class (templated)
 class Reptile<T> {
-     {static} std::string orderToString(Order order)
+     {static} orderToString(Order order) : string
 
     + enum Order { Testudines, Crocodilians, Squamata, Rhynchocephalia }
     # Order order_
 
     # Reptile(string name, string breed, int birthYear, Order order)
-    # string getOrder()
-    # {abstract} string getColour()
-    # {abstract} string getPattern()
+    # getOrder() : string
+    # {abstract} getColour() : string
+    # {abstract} getPattern() : string
 }
 
 BaseAnimal <|-- Reptile
 
 ' Snake class
 class Snake {
-      {static} std::string colourToString(Colour colour)
-      {static} std::string patternToString(Pattern pattern)
+      {static} colourToString(Colour colour) : string
+      {static} patternToString(Pattern pattern) : string
 
 
 
@@ -120,9 +120,9 @@ class Snake {
     -Colour colour_
     -Pattern pattern_
     +Snake(string name, string breed, int birthYear, Reptile::Order order, Colour colour, Pattern pattern)
-    +string getOrder()
-    +string getColour() const
-    +string getPattern() const
+    +getOrder() : string
+    +getColour() : string
+    + getPattern() : string
 }
 
 Reptile <|-- Snake
@@ -133,18 +133,18 @@ class Client {
     - string name
     - unordered_map<string, unique_ptr<BaseAnimal>> animalsByName
     + Client(string name, int phoneNumber)
-    + void addAnimal(unique_ptr<BaseAnimal> animal)
-    + BaseAnimal& getAnimal(const string& name)
-    + string getName()
-    + int getPhoneNumber()
+    + addAnimal(unique_ptr<BaseAnimal> animal) : void
+    + getAnimal(const string& name): BaseAnimal&
+    + string getName() : string
+    + getPhoneNumber() : int
 }
 
 ' Clients class
 class Clients {
     - unordered_map<int, Client*> clientsByPhoneNumber
-    + void addClient(Client* client)
-    + Client* getClient(int phoneNumber)
-    + Client* findClient(Client*)
+    + addClient(std::unique_ptr<Client> client) : void
+    + getClient(int phoneNumber) : Client&
+    + findClient(Client*) : Client&
 }
 
 
