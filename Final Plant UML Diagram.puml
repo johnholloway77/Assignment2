@@ -39,11 +39,9 @@ class BaseAnimal {
 
 ' Mammal class (templated)
 class Mammal<T> {
-    {static} colourToString(Colour colour) : string
-    {static} markingToString(Marking marking) : string
     # Mammal(string name, string breed, int birthYear)
-    + {abstract}  getColour() : string
-    +{abstract}  getMarking() : string
+    + getColour() : string
+    + getMarking() : string
 }
 
 BaseAnimal <|-- Mammal
@@ -52,6 +50,8 @@ BaseAnimal <|-- Mammal
 class Cat {
     {static}  colourToString(Colour colour) : string
     {static} markingToString(Marking marking) : string
+    -Colour colour_
+    -Marking marking_
 
     + enum Colour { Black, Chocolate, Gray, Cream, Cinnamon, Red }
     + enum Marking { Brindle, Spotted, Tortoise, Calico, Striped, Tabby }
@@ -68,6 +68,8 @@ class Dog {
 
     + enum Colour { Black, Chocolate, Gray, Gold, White, Yellow }
     + enum Marking { Brindle, Spotted, TwoColour, Merle, Tricolour, Tudexo }
+    -Colour colour_
+    -Marking marking_
 
     + Dog(string name, string breed, int birthYear, Colour colour, Marking marking)
 }
@@ -81,6 +83,8 @@ class Rabbit {
 
     + enum Colour { Black, Brown, Gray, White }
     + enum Marking { Solid, Spotted, Patches }
+    -Colour colour_
+    -Marking marking_
 
     + Rabbit(string name, string breed, int birthYear, Colour colour, Marking marking)
 }
@@ -95,9 +99,9 @@ class Reptile<T> {
     # Order order_
 
     # Reptile(string name, string breed, int birthYear, Order order)
-    # getOrder() : string
-    # {abstract} getColour() : string
-    # {abstract} getPattern() : string
+    + getOrder() : string
+    + getColour() : string
+    + getPattern() : string
 }
 
 BaseAnimal <|-- Reptile
