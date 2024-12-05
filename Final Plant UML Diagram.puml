@@ -27,13 +27,13 @@ end legend
 
 ' BaseAnimal class
 class BaseAnimal {
-    - string name_ : string
-    - string breed_ : string
-    - birthYear_ : int
+    # string name_ : string
+    # string breed_ : string
+    # birthYear_ : int
     + getBirthYear() const: int
     + string getBreed() : const string&
     + string getName() : const string&
-    # {abstract} getColour(): const string
+    {abstract} getColour(): const string
 
 }
 
@@ -42,8 +42,8 @@ class Mammal<T> {
     {static} colourToString(Colour colour) : string
     {static} markingToString(Marking marking) : string
     # Mammal(string name, string breed, int birthYear)
-    # {abstract}  getColour() : string
-    # {abstract}  getMarking() : string
+    + {abstract}  getColour() : string
+    +{abstract}  getMarking() : string
 }
 
 BaseAnimal <|-- Mammal
@@ -57,8 +57,6 @@ class Cat {
     + enum Marking { Brindle, Spotted, Tortoise, Calico, Striped, Tabby }
 
     + Cat(string name, string breed, int birthYear, Colour colour, Marking marking)
-    + getColour() : string
-    + getMarking(): string
 }
 
 Mammal <|-- Cat
@@ -72,8 +70,6 @@ class Dog {
     + enum Marking { Brindle, Spotted, TwoColour, Merle, Tricolour, Tudexo }
 
     + Dog(string name, string breed, int birthYear, Colour colour, Marking marking)
-    + getColour() : string
-    + getMarking() : string
 }
 
 Mammal <|-- Dog
@@ -87,15 +83,13 @@ class Rabbit {
     + enum Marking { Solid, Spotted, Patches }
 
     + Rabbit(string name, string breed, int birthYear, Colour colour, Marking marking)
-    + getColour(): string
-    + getMarking(): string
 }
 
 Mammal <|-- Rabbit
 
 ' Reptile class (templated)
 class Reptile<T> {
-     {static} orderToString(Order order) : string
+    # {static} orderToString(Order order) : string
 
     + enum Order { Testudines, Crocodilians, Squamata, Rhynchocephalia }
     # Order order_
@@ -120,9 +114,6 @@ class Snake {
     -Colour colour_
     -Pattern pattern_
     +Snake(string name, string breed, int birthYear, Reptile::Order order, Colour colour, Pattern pattern)
-    +getOrder() : string
-    +getColour() : string
-    + getPattern() : string
 }
 
 Reptile <|-- Snake
@@ -141,7 +132,7 @@ class Client {
 
 ' Clients class
 class Clients {
-    - unordered_map<int, Client*> clientsByPhoneNumber
+    - unordered_map<int, std::unique_ptr<Client>> clientsByPhoneNumber
     + addClient(std::unique_ptr<Client> client) : void
     + getClient(int phoneNumber) : Client&
     + findClient(Client*) : Client&
