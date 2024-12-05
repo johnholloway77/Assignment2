@@ -44,11 +44,6 @@ public:
         this->pattern_ = pattern;
     }
 
-    //   std::string getOrder();
-
-//  std::string getColour() const override;
-//    std::string getPattern() const override;
-
 
 protected:
     friend class Reptile<Snake>;

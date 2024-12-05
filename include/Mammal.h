@@ -29,10 +29,6 @@ protected:
         return Child::markingToString(marking);
     }
 
-//  virtual std::string getColour() const override = 0;
-//  virtual std::string getMarking() const = 0;
-
-
 
 public:
     Mammal(const std::string &name, const std::string &breed, int birthYear)
