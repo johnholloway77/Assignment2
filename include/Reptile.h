@@ -17,15 +17,14 @@ template<typename Child>
 class Reptile : public BaseAnimal {
 
 public:
-    enum class Colour {
-    };
+
     enum class Order {
 #define X(name) name,
         REPTILE_ORDERS
 #undef X
     };
 
-    std::string getColour() const {
+    std::string getColour() const override {
         const Child *child = static_cast<const Child *>(this);
         return Child::colourToString(child->colour_);
     }
@@ -40,6 +39,17 @@ public:
     }
 
 protected:
+
+    Order order_;
+
+    Reptile(const std::string &name, const std::string &breed, int birthYear,
+            Reptile::Order order)
+            : BaseAnimal(name, breed, birthYear) {
+        this->order_ = order;
+    };
+
+    ~Reptile() override = default;
+
     static std::string orderToString(Order order) {
         switch (order) {
 #define X(name)     \
@@ -52,21 +62,4 @@ protected:
         }
     }
 
-    // Colour colour;
-    Order order_;
-
-    Reptile(const std::string &name, const std::string &breed, int birthYear,
-            Reptile::Order order)
-            : BaseAnimal(name, breed, birthYear) {
-        this->order_ = order;
-    };
-
-    ~Reptile() = default;
-
-//    std::string getOrder() {
-//        return Child::getOrder();
-//    };
-
-    //virtual std::string getColour() const override = 0;
-    //virtual std::string getPattern() const = 0;
 };

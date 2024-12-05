@@ -7,28 +7,58 @@
 
 #include <unordered_map>
 
+
 void Client::addAnimal(std::unique_ptr<BaseAnimal> animal) {
-  auto result = animalsByName.insert({animal->getName(), std::move(animal)});
 
-  if (!result.second) {
-    std::cout << "Client already has animal with this name" << std::endl;
-  }
+
+    auto result = _animalsByName.find(animal->getName());
+
+    if (result != _animalsByName.end()) {
+        std::cout << "Client already has animal with this name" << std::endl;
+        return;
+    }
+
+    BaseAnimal &animalReference = addAnimalToVector(std::move(animal));
+    addAnimalToMap(animalReference);
 }
 
-BaseAnimal& Client::getAnimal(const std::string& animalName) {
-  auto iterator = animalsByName.find(animalName);
-
-  if (iterator != animalsByName.end() && iterator->second) {
-    return *(iterator->second);
-  } else {
-    throw std::out_of_range("Animal not found: " + animalName);
-  }
+void Client::addAnimalToMap(BaseAnimal &animalReference) {
+    // _animalsByName[animalReference.getName()] = std::ref(animalReference);
+    _animalsByName.emplace(animalReference.getName(), std::ref(animalReference));
 }
 
-const std::string& Client::getName() const {
-  return name;
+BaseAnimal &Client::addAnimalToVector(std::unique_ptr<BaseAnimal> animal) {
+
+    _animals.push_back(std::move(animal));
+    return *_animals.back();
+
 }
+
+
+BaseAnimal &Client::getAnimal(const std::string &animalName) {
+    auto iterator = _animalsByName.find(animalName);
+
+    if (iterator != _animalsByName.end()) {
+        return (iterator->second);
+    } else {
+        throw std::out_of_range("Animal not found: " + animalName);
+    }
+}
+
+const std::string &Client::getName() const {
+    return _name;
+}
+
 
 int Client::getPhoneNumber() {
-  return phoneNumber;
+    return _phoneNumber;
+}
+
+void Client::updateAnimalName(BaseAnimal &animal, std::string newName) {
+
+    _animalsByName.erase(animal.getName());
+
+    animal.setName(newName);
+
+    _animalsByName.emplace(animal.getName(), animal);
 }

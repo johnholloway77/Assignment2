@@ -13,21 +13,6 @@
 template<typename Child>
 class Mammal : public BaseAnimal {
 protected:
-    enum class Colour {
-    };
-    enum class Marking {
-    };
-
-    //    Colour colour;
-    //    Marking marking;
-
-    static std::string colourToString(Colour colour) {
-        return Child::colourToString(colour);
-    }
-
-    static std::string markingToString(Marking marking) {
-        return Child::markingToString(marking);
-    }
 
 
 public:
@@ -38,12 +23,18 @@ public:
 
     std::string getColour() const {
         const Child *child = static_cast<const Child *>(this);
-        return Child::colourToString(child->colour_);
+        return Child::colourToStringImplementation(child->colour_);
     }
 
     std::string getMarking() const {
         const Child *child = static_cast<const Child *>(this);
-        return Child::markingToString(child->marking_);
+        //return Child::markingToStringImplementation(child->marking_);
+
+        auto dangerous_colour = Child::markingToStringImplementation(child->marking_);
+
+        std::cout << "The animals marking is " << dangerous_colour << std::endl;
+
+        return "badcolour";
     }
 };
 

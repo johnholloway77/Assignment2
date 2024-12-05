@@ -11,19 +11,31 @@
 #include "Mammal.h"
 
 class Client {
- private:
-  int phoneNumber;
-  std::string name;
-  std::unordered_map<std::string, std::unique_ptr<BaseAnimal>> animalsByName;
+private:
+    int _phoneNumber;
+    std::string _name;
+    std::vector<std::unique_ptr<BaseAnimal>> _animals;
+    std::unordered_map<std::string, std::reference_wrapper<BaseAnimal>> _animalsByName;
 
- public:
-  Client(std::string name, int phoneNumber)
-      : name(name), phoneNumber(phoneNumber) {}
+    BaseAnimal &addAnimalToVector(std::unique_ptr<BaseAnimal> animal);
 
-  void addAnimal(std::unique_ptr<BaseAnimal> animal);
-  BaseAnimal& getAnimal(const std::string& name);
-  const std::string& getName() const;
-  int getPhoneNumber();
+    void addAnimalToMap(BaseAnimal &animalReference);
+
+
+public:
+    int getPhoneNumber();
+
+    Client(std::string name, int phoneNumber)
+            : _name(name), _phoneNumber(phoneNumber) {}
+
+    void addAnimal(std::unique_ptr<BaseAnimal> animal);
+
+    BaseAnimal &getAnimal(const std::string &name);
+
+    const std::string &getName() const;
+
+    void updateAnimalName(BaseAnimal &animal, std::string newName);
+    
 };
 
 #endif  // ASSIGN2_INCLUDE_CLIENT_H_

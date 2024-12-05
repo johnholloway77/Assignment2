@@ -43,6 +43,6 @@ TEST(ClientsTest, AddClientAndAnimalTest) {
 
     EXPECT_THROW(timmy.getAnimal("FakeName"), std::out_of_range);
 
-    const Cat &josie = dynamic_cast<Cat &>(timmy.getAnimal("Josephine"));
+    const Cat josie = dynamic_cast<Cat &>(timmy.getAnimal("Josephine"));
     EXPECT_EQ(josie.getName(), "Josephine");
 }

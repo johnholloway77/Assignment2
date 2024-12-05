@@ -40,9 +40,6 @@ public:
         this->marking_ = marking;
     };
 
-//    std::string getColour() const override;
-//
-//    std::string getMarking() const override;
 
 private:
     friend class Mammal<Rabbit>;
@@ -50,7 +47,7 @@ private:
     Colour colour_;
     Marking marking_;
 
-    static std::string markingToString(Marking marking) {
+    static std::string markingToStringImplementation(Marking marking) {
         switch (marking) {
 #define X(name)       \
   case Marking::name: \
@@ -63,7 +60,7 @@ private:
         }
     };
 
-    static std::string colourToString(Colour colour) {
+    static std::string colourToStringImplementation(Colour colour) {
         switch (colour) {
 #define X(name)      \
   case Colour::name: \
