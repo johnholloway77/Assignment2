@@ -7,7 +7,7 @@
 #include "../../include/Snake.h"
 
 int main() {
-    std::unique_ptr<Client> timmy = std::make_unique<Client>("Timmy", 1234567890);
+    std::shared_ptr<Client> timmy = std::make_unique<Client>("Timmy", 1234567890);
 
     timmy->addAnimal(std::make_unique<Cat>("Josephine", "Domestic Shorthair",
                                            2021, Cat::Colour::Cinnamon,
