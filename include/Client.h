@@ -14,12 +14,12 @@ class Client {
 private:
     int _phoneNumber;
     std::string _name;
-    std::vector<std::unique_ptr<BaseAnimal>> _animals;
-    std::unordered_map<std::string, std::reference_wrapper<BaseAnimal>> _animalsByName;
+    std::vector<std::shared_ptr<BaseAnimal>> _animals;
+    std::unordered_map<std::string, std::shared_ptr<BaseAnimal>> _animalsByName;
 
-    BaseAnimal &addAnimalToVector(std::unique_ptr<BaseAnimal> animal);
+    void addAnimalToVector(std::shared_ptr<BaseAnimal> animal);
 
-    void addAnimalToMap(BaseAnimal &animalReference);
+    void addAnimalToMap(std::shared_ptr<BaseAnimal> animal);
 
 
 public:
@@ -28,14 +28,14 @@ public:
     Client(std::string name, int phoneNumber)
             : _name(name), _phoneNumber(phoneNumber) {}
 
-    void addAnimal(std::unique_ptr<BaseAnimal> animal);
+    void addAnimal(std::shared_ptr<BaseAnimal> animal);
 
-    BaseAnimal &getAnimal(const std::string &name);
+    std::shared_ptr<BaseAnimal> getAnimal(const std::string &name);
 
     const std::string &getName() const;
 
-    void updateAnimalName(BaseAnimal &animal, std::string newName);
-    
+    void updateAnimalName(std::shared_ptr<BaseAnimal> animal, const std::string &newName);
+
 };
 
 #endif  // ASSIGN2_INCLUDE_CLIENT_H_

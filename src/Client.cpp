@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 
-void Client::addAnimal(std::unique_ptr<BaseAnimal> animal) {
+void Client::addAnimal(std::shared_ptr<BaseAnimal> animal) {
 
 
     auto result = _animalsByName.find(animal->getName());
@@ -18,24 +18,23 @@ void Client::addAnimal(std::unique_ptr<BaseAnimal> animal) {
         return;
     }
 
-    BaseAnimal &animalReference = addAnimalToVector(std::move(animal));
-    addAnimalToMap(animalReference);
+    addAnimalToVector(animal);
+    addAnimalToMap(animal);
 }
 
-void Client::addAnimalToMap(BaseAnimal &animalReference) {
-    // _animalsByName[animalReference.getName()] = std::ref(animalReference);
-    _animalsByName.emplace(animalReference.getName(), std::ref(animalReference));
+void Client::addAnimalToMap(std::shared_ptr<BaseAnimal> animal) {
+    _animalsByName.emplace(animal->getName(), animal);
 }
 
-BaseAnimal &Client::addAnimalToVector(std::unique_ptr<BaseAnimal> animal) {
+void Client::addAnimalToVector(std::shared_ptr<BaseAnimal> animal) {
 
-    _animals.push_back(std::move(animal));
-    return *_animals.back();
+    _animals.push_back(animal);
+
 
 }
 
 
-BaseAnimal &Client::getAnimal(const std::string &animalName) {
+std::shared_ptr<BaseAnimal> Client::getAnimal(const std::string &animalName) {
     auto iterator = _animalsByName.find(animalName);
 
     if (iterator != _animalsByName.end()) {
@@ -54,11 +53,11 @@ int Client::getPhoneNumber() {
     return _phoneNumber;
 }
 
-void Client::updateAnimalName(BaseAnimal &animal, std::string newName) {
+void Client::updateAnimalName(std::shared_ptr<BaseAnimal> animal, const std::string &newName) {
 
-    _animalsByName.erase(animal.getName());
+    _animalsByName.erase(animal->getName());
 
-    animal.setName(newName);
+    animal->setName(newName);
 
-    _animalsByName.emplace(animal.getName(), animal);
+    _animalsByName.emplace(animal->getName(), animal);
 }
