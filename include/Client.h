@@ -19,7 +19,7 @@ private:
 
     void addAnimalToVector(std::shared_ptr<BaseAnimal> animal);
 
-    void addAnimalToPhoneMap(std::shared_ptr<BaseAnimal> animal);
+    void addAnimalToNameMap(std::shared_ptr<BaseAnimal> animal);
 
 
 public:

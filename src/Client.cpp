@@ -19,10 +19,10 @@ void Client::addAnimal(std::shared_ptr<BaseAnimal> animal) {
     }
 
     addAnimalToVector(animal);
-    addAnimalToPhoneMap(animal);
+    addAnimalToNameMap(animal);
 }
 
-void Client::addAnimalToPhoneMap(std::shared_ptr<BaseAnimal> animal) {
+void Client::addAnimalToNameMap(std::shared_ptr<BaseAnimal> animal) {
     animalsByName_.emplace(animal->getName(), animal);
 }
 
