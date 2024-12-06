@@ -12,10 +12,10 @@
 
 class Client {
 private:
-    int _phoneNumber;
-    std::string _name;
-    std::vector<std::shared_ptr<BaseAnimal>> _animals;
-    std::unordered_map<std::string, std::shared_ptr<BaseAnimal>> _animalsByName;
+    int phoneNumber_;
+    std::string name_;
+    std::vector<std::shared_ptr<BaseAnimal>> animals_;
+    std::unordered_map<std::string, std::shared_ptr<BaseAnimal>> animalsByName_;
 
     void addAnimalToVector(std::shared_ptr<BaseAnimal> animal);
 
@@ -26,7 +26,7 @@ public:
     int getPhoneNumber();
 
     Client(std::string name, int phoneNumber)
-            : _name(name), _phoneNumber(phoneNumber) {}
+            : name_(name), phoneNumber_(phoneNumber) {}
 
     void addAnimal(std::shared_ptr<BaseAnimal> animal);
 
