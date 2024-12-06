@@ -28,6 +28,9 @@ void Client::addAnimalToNameMap(std::shared_ptr<BaseAnimal> animal) {
 
 void Client::addAnimalToVector(std::shared_ptr<BaseAnimal> animal) {
 
+    std::weak_ptr<IObserver> clientWeakPointer = shared_from_this();
+
+    animal->addIObserver(clientWeakPointer);
     animals_.push_back(animal);
 
 
@@ -53,11 +56,17 @@ int Client::getPhoneNumber() {
     return phoneNumber_;
 }
 
-void Client::updateAnimalName(std::shared_ptr<BaseAnimal> animal, const std::string &newName) {
+void Client::onAnimalNameChange(const std::string &oldName, const std::string &newName) {
 
-    animalsByName_.erase(animal->getName());
 
-    animal->setName(newName);
+    auto iterator = animalsByName_.find(oldName);
 
-    animalsByName_.emplace(animal->getName(), animal);
+    if (iterator != animalsByName_.end()) {
+
+        auto animal = iterator->second;
+        animalsByName_.erase(oldName);
+        animalsByName_.emplace(newName, animal);
+    }
+
+
 }

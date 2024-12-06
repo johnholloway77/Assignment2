@@ -8,9 +8,9 @@
 
 TEST(Client_Test, DoEverythingTest) {
 
-    auto timmy = std::make_unique<Client>("Timmy", 1234567890);
+    auto timmy = std::make_shared<Client>("Timmy", 1234567890);
 
-    timmy->addAnimal(std::make_unique<Cat>("Josephine", "Domestic Shorthair",
+    timmy->addAnimal(std::make_shared<Cat>("Josephine", "Domestic Shorthair",
                                            2021, Cat::Colour::Cinnamon,
                                            Cat::Marking::Tortoise));
     try {
@@ -25,7 +25,7 @@ TEST(Client_Test, DoEverythingTest) {
 
 TEST(Client_Test, ChangeCatNameTest) {
 
-    auto timmy = std::make_unique<Client>("Timmy", 1234567890);
+    auto timmy = std::make_shared<Client>("Timmy", 1234567890);
 
     timmy->addAnimal(std::make_shared<Cat>("Josephine", "Domestic Shorthair",
                                            2021, Cat::Colour::Cinnamon,
@@ -34,7 +34,8 @@ TEST(Client_Test, ChangeCatNameTest) {
         auto josie = timmy->getAnimal("Josephine");
         EXPECT_EQ(josie->getName(), "Josephine");
 
-        timmy->updateAnimalName(josie, "JosieBean");
+        josie->setName("JosieBean");
+
         EXPECT_EQ(josie->getName(), "JosieBean");
 
         EXPECT_THROW(timmy->getAnimal("Josephine"), std::out_of_range);
@@ -45,7 +46,7 @@ TEST(Client_Test, ChangeCatNameTest) {
 
         EXPECT_THROW(timmy->getAnimal("Josephine"), std::out_of_range);
 
-        timmy->updateAnimalName(josie_2, "Josephine");
+        josie_2->setName("Josephine");
         EXPECT_EQ(josie->getName(), "Josephine");
 
 
@@ -58,7 +59,7 @@ TEST(Client_Test, ChangeCatNameTest) {
 
 TEST(Client_Test, ThrowTest) {
 
-    auto timmy = std::make_unique<Client>("Timmy", 1234567890);
+    auto timmy = std::make_shared<Client>("Timmy", 1234567890);
 
     timmy->addAnimal(std::make_shared<Cat>("Josephine", "Domestic Shorthair",
                                            2021, Cat::Colour::Cinnamon,

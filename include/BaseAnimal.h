@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <string>
+#include "IObserver.h"
 
 class BaseAnimal {
 public:
@@ -21,8 +22,10 @@ public:
 
     const std::string &getName() const;
 
-private:
-    friend class Client;
+    void addIObserver(std::weak_ptr<IObserver> i_observer);
+
+    void notifyIObserver(const std::string &oldName, const std::string &newName);
+
 
     void const setName(const std::string &name);
 
@@ -30,9 +33,11 @@ protected:
     std::string name_;
     std::string breed_;
     int birthYear_;
+    std::vector<std::weak_ptr<IObserver>> i_observers_;
 
     BaseAnimal(const std::string &name, const std::string &breed, int birthYear)
             : name_(name), breed_(breed), birthYear_(birthYear) {}
+
 
     virtual std::string getColour() const = 0;
 

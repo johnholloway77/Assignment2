@@ -17,7 +17,7 @@ TEST(ClientsTest, AddClientTest) {
 
     EXPECT_TRUE(clientsThingimajig);
 
-    clientsThingimajig->addClient(std::make_unique<Client>("Timmy", 1234567890));
+    clientsThingimajig->addClient(std::make_shared<Client>("Timmy", 1234567890));
 
     auto timmy = clientsThingimajig->getClient(1234567890);
 
@@ -33,7 +33,7 @@ TEST(ClientsTest, AddClientAndAnimalTest) {
 
     clientsThingimajig = std::make_unique<Clients>();
 
-    clientsThingimajig->addClient(std::make_unique<Client>("Timmy", 1234567890));
+    clientsThingimajig->addClient(std::make_shared<Client>("Timmy", 1234567890));
 
     auto timmy = clientsThingimajig->getClient(1234567890);
 

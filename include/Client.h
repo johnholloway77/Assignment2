@@ -10,7 +10,7 @@
 
 #include "Mammal.h"
 
-class Client {
+class Client : public IObserver, public std::enable_shared_from_this<Client> {
 private:
     int phoneNumber_;
     std::string name_;
@@ -34,7 +34,7 @@ public:
 
     const std::string &getName() const;
 
-    void updateAnimalName(std::shared_ptr<BaseAnimal> animal, const std::string &newName);
+    void onAnimalNameChange(const std::string &oldName, const std::string &newName) override;
 
 };
 
