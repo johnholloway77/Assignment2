@@ -31,7 +31,7 @@ TEST(Client_Test, ChangeCatNameTest) {
                                            2021, Cat::Colour::Cinnamon,
                                            Cat::Marking::Tortoise));
     try {
-        auto josie = std::dynamic_pointer_cast<Cat>(timmy->getAnimal("Josephine"));
+        auto josie = timmy->getAnimal("Josephine");
         EXPECT_EQ(josie->getName(), "Josephine");
 
         timmy->updateAnimalName(josie, "JosieBean");
@@ -39,7 +39,7 @@ TEST(Client_Test, ChangeCatNameTest) {
 
         EXPECT_THROW(timmy->getAnimal("Josephine"), std::out_of_range);
 
-        auto josie_2 = std::dynamic_pointer_cast<Cat>(timmy->getAnimal("JosieBean"));
+        std::shared_ptr<BaseAnimal> josie_2 = timmy->getAnimal("JosieBean");
 
         EXPECT_EQ(josie_2->getName(), "JosieBean");
 
@@ -47,6 +47,7 @@ TEST(Client_Test, ChangeCatNameTest) {
 
         timmy->updateAnimalName(josie_2, "Josephine");
         EXPECT_EQ(josie->getName(), "Josephine");
+
 
     } catch (const std::out_of_range &ex) {
         std::cout << "No kitty :(\n";
