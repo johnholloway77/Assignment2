@@ -7,20 +7,34 @@
 
 #include <unordered_map>
 
-void Clients::addClient(std::unique_ptr<Client> client) {
-    auto result = clientsByPhoneNumber.insert({client->getPhoneNumber(), std::move(client)});
+void Clients::addClient(std::shared_ptr<Client> client) {
 
-    if (!result.second){
-        std::cout << "Client already exists with this phone number" << std::endl;
+    auto result = clientsByPhoneNumber_.find(client->getPhoneNumber());
+
+    if (result != clientsByPhoneNumber_.end()) {
+        std::cout << "Client list already includes client with this phone number" << std::endl;
     }
+
+    addClientToPhoneMap(client);
+    addClientToVector(client);
+
 }
 
-Client& Clients::getClient(int phoneNumber) {
-    auto iterator = clientsByPhoneNumber.find(phoneNumber);
+void Clients::addClientToPhoneMap(std::shared_ptr<Client> client) {
+    clientsByPhoneNumber_.emplace(client->getPhoneNumber(), client);
+}
 
-    if(iterator != clientsByPhoneNumber.end() && iterator->second){
-        return *(iterator->second);
-    } else{
+void Clients::addClientToVector(std::shared_ptr<Client> client) {
+    clients_.push_back(client);
+}
+
+
+std::shared_ptr<Client> Clients::getClient(int phoneNumber) {
+    auto iterator = clientsByPhoneNumber_.find(phoneNumber);
+
+    if (iterator != clientsByPhoneNumber_.end() && iterator->second) {
+        return iterator->second;
+    } else {
 
         throw std::out_of_range("Client not found with number: " + std::to_string(phoneNumber));
     }

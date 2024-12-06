@@ -19,9 +19,9 @@ TEST(ClientsTest, AddClientTest) {
 
     clientsThingimajig->addClient(std::make_unique<Client>("Timmy", 1234567890));
 
-    const Client &timmy = clientsThingimajig->getClient(1234567890);
+    auto timmy = clientsThingimajig->getClient(1234567890);
 
-    EXPECT_EQ(timmy.getName(), "Timmy");
+    EXPECT_EQ(timmy->getName(), "Timmy");
 
     EXPECT_THROW(clientsThingimajig->getClient(8675301), std::out_of_range);
 }
@@ -35,14 +35,15 @@ TEST(ClientsTest, AddClientAndAnimalTest) {
 
     clientsThingimajig->addClient(std::make_unique<Client>("Timmy", 1234567890));
 
-    Client &timmy = clientsThingimajig->getClient(1234567890);
+    auto timmy = clientsThingimajig->getClient(1234567890);
 
-    timmy.addAnimal(std::make_unique<Cat>("Josephine", "Domestic Shorthair",
-                                          2021, Cat::Colour::Cinnamon,
-                                          Cat::Marking::Tortoise));
+    timmy->addAnimal(std::make_unique<Cat>("Josephine", "Domestic Shorthair",
+                                           2021, Cat::Colour::Cinnamon,
+                                           Cat::Marking::Tortoise));
 
-    EXPECT_THROW(timmy.getAnimal("FakeName"), std::out_of_range);
+    EXPECT_THROW(timmy->getAnimal("FakeName"), std::out_of_range);
 
-    const std::shared_ptr<Cat> josie = std::dynamic_pointer_cast<Cat>(timmy.getAnimal("Josephine"));
+    const std::shared_ptr<Cat> josie = std::dynamic_pointer_cast<Cat>(timmy->getAnimal("Josephine"));
     EXPECT_EQ(josie->getName(), "Josephine");
 }
+

@@ -22,54 +22,54 @@ int main() {
             Snake::Pattern::Reticulated));
 
     try {
-        Dog &oldYeller = dynamic_cast<Dog &>(timmy->getAnimal("Old Yeller"));
+        auto oldYeller = std::dynamic_pointer_cast<Dog>(timmy->getAnimal("Old Yeller"));
 
-        std::cout << "Name: " << oldYeller.getName()
-                  << "\n\tBreed: " << oldYeller.getBreed()
-                  << "\n\tBirth year: " << oldYeller.getBirthYear() << std::endl;
-        std::cout << "\tColour: " << oldYeller.getColour()
-                  << "\n\tMarking: " << oldYeller.getMarking() << std::endl;
+        std::cout << "Name: " << oldYeller->getName()
+                  << "\n\tBreed: " << oldYeller->getBreed()
+                  << "\n\tBirth year: " << oldYeller->getBirthYear() << std::endl;
+        std::cout << "\tColour: " << oldYeller->getColour()
+                  << "\n\tMarking: " << oldYeller->getMarking() << std::endl;
     } catch (const std::out_of_range &ex) {
         std::cout << "No doggy\n";
     }
 
-    Cat &josie = dynamic_cast<Cat &>(timmy->getAnimal("Josephine"));
+    auto josie = std::dynamic_pointer_cast<Cat>(timmy->getAnimal("Josephine"));
 
-    std::cout << "Name: " << josie.getName() << std::endl
-              << "\tBreed: " << josie.getBreed()
-              << "\n\tBirth year: " << josie.getBirthYear() << std::endl;
-    std::cout << "\tColour: " << josie.getColour() << std::endl
-              << "\tMarking: " << josie.getMarking() << std::endl;
+    std::cout << "Name: " << josie->getName() << std::endl
+              << "\tBreed: " << josie->getBreed()
+              << "\n\tBirth year: " << josie->getBirthYear() << std::endl;
+    std::cout << "\tColour: " << josie->getColour() << std::endl
+              << "\tMarking: " << josie->getMarking() << std::endl;
 
     try {
-        Cat &lucky = dynamic_cast<Cat &>(timmy->getAnimal("lucky"));
-        std::cout << "Name: " << lucky.getName() << std::endl
-                  << "\tBreed: " << lucky.getBreed()
-                  << "\n\tBirth year: " << lucky.getBirthYear() << std::endl;
+        auto lucky = std::dynamic_pointer_cast<Cat>(timmy->getAnimal("lucky"));
+        std::cout << "Name: " << lucky->getName() << std::endl
+                  << "\tBreed: " << lucky->getBreed()
+                  << "\n\tBirth year: " << lucky->getBirthYear() << std::endl;
     } catch (const std::out_of_range &ex) {
         std::cout << "No kitty :(\n";
     }
 
     try {
-        Rabbit &buggs = dynamic_cast<Rabbit &>(timmy->getAnimal("Buggs"));
-        std::cout << "Name: " << buggs.getName() << std::endl
-                  << "\tBreed: " << buggs.getBreed()
-                  << "\n\tBirth year: " << buggs.getBirthYear() << std::endl;
-        std::cout << "\tColour: " << buggs.getColour() << std::endl
-                  << "\tMarking: " << buggs.getMarking() << std::endl;
+        auto buggs = std::dynamic_pointer_cast<Rabbit>(timmy->getAnimal("Buggs"));
+        std::cout << "Name: " << buggs->getName() << std::endl
+                  << "\tBreed: " << buggs->getBreed()
+                  << "\n\tBirth year: " << buggs->getBirthYear() << std::endl;
+        std::cout << "\tColour: " << buggs->getColour() << std::endl
+                  << "\tMarking: " << buggs->getMarking() << std::endl;
 
     } catch (const std::out_of_range &ex) {
         std::cout << "No bunny\n";
     }
 
     try {
-        Snake &snakey = dynamic_cast<Snake &>(timmy->getAnimal("Slithers"));
-        std::cout << "Name: " << snakey.getName() << std::endl
-                  << "\tOrder: " << snakey.getOrder()
-                  << "\n\tBreed: " << snakey.getBreed()
-                  << "\n\tBirth year: " << snakey.getBirthYear() << std::endl;
-        std::cout << "\tColour: " << snakey.getColour() << std::endl
-                  << "\tMarking: " << snakey.getPattern() << std::endl;
+        auto snakey = std::dynamic_pointer_cast<Snake>(timmy->getAnimal("Slithers"));
+        std::cout << "Name: " << snakey->getName() << std::endl
+                  << "\tOrder: " << snakey->getOrder()
+                  << "\n\tBreed: " << snakey->getBreed()
+                  << "\n\tBirth year: " << snakey->getBirthYear() << std::endl;
+        std::cout << "\tColour: " << snakey->getColour() << std::endl
+                  << "\tMarking: " << snakey->getPattern() << std::endl;
 
     } catch (const std::out_of_range &ex) {
         std::cout << "No Snake\n";/**/

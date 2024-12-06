@@ -11,13 +11,20 @@
 #include "Client.h"
 
 class Clients {
- private:
-  std::unordered_map<int, std::unique_ptr<Client>> clientsByPhoneNumber;
+private:
+    std::vector<std::shared_ptr<Client>> clients_;
+    std::unordered_map<int, std::shared_ptr<Client>> clientsByPhoneNumber_;
 
- public:
-  void addClient(std::unique_ptr<Client> client);
-  Client& getClient(int phoneNumber);
-  Client& findClient(Client*);
+    void addClientToVector(std::shared_ptr<Client> client);
+
+    void addClientToPhoneMap(std::shared_ptr<Client>);
+
+public:
+    void addClient(std::shared_ptr<Client> client);
+
+    std::shared_ptr<Client> getClient(int phoneNumber);
+
+    Client *findClient(Client *);
 };
 
 #endif  // ASSIGN2_INCLUDE_CLIENTS_H_
