@@ -52,22 +52,19 @@ private:
     Colour colour_;
     Marking marking_;
 
-//    static std::string markingToStringImplementation(Marking marking) {
-//        switch (marking) {
-//#define X(name)       \
-//  case Marking::name: \
-//    return #name;
-//            CAT_MARKINGS
-//#undef X
-//
-//            default:
-//                return "Unknown";
-//        }
-//    };
+    static std::string markingToStringImplementation(Marking marking) {
+        switch (marking) {
+#define X(name)       \
+  case Marking::name: \
+    return #name;
+            CAT_MARKINGS
+#undef X
 
-    static int markingToStringImplementation(Marking marking) {
-        return -123;
-    }
+            default:
+                return "Unknown";
+        }
+    };
+
 
     static std::string colourToStringImplementation(Colour colour) {
         switch (colour) {

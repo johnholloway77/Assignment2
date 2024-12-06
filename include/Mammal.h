@@ -28,13 +28,9 @@ public:
 
     std::string getMarking() const {
         const Child *child = static_cast<const Child *>(this);
-        //return Child::markingToStringImplementation(child->marking_);
 
-        auto dangerous_colour = Child::markingToStringImplementation(child->marking_);
-
-        std::cout << "The animals marking is " << dangerous_colour << std::endl;
-
-        return "badcolour";
+        return Child::markingToStringImplementation(child->marking_);
+        
     }
 };
 
