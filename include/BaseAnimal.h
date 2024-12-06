@@ -9,8 +9,9 @@
 #include <iostream>
 #include <string>
 #include "IObserver.h"
+#include "INotifier.h"
 
-class BaseAnimal {
+class BaseAnimal : public INotifier {
 public:
 
 
@@ -24,7 +25,7 @@ public:
 
     void addIObserver(std::weak_ptr<IObserver> i_observer);
 
-    void notifyIObserver(const std::string &oldName, const std::string &newName);
+    void notifyIObserverNameChange(const std::string &oldName, const std::string &newName);
 
 
     void const setName(const std::string &name);

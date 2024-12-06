@@ -56,7 +56,7 @@ int Client::getPhoneNumber() {
     return phoneNumber_;
 }
 
-void Client::onAnimalNameChange(const std::string &oldName, const std::string &newName) {
+void Client::onNotifierNameChange(const std::string &oldName, const std::string &newName) {
 
 
     auto iterator = animalsByName_.find(oldName);

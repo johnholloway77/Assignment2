@@ -34,7 +34,7 @@ public:
 
     const std::string &getName() const;
 
-    void onAnimalNameChange(const std::string &oldName, const std::string &newName) override;
+    void onNotifierNameChange(const std::string &oldName, const std::string &newName) override;
 
 };
 

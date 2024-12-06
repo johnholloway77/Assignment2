@@ -10,7 +10,7 @@
 
 class IObserver {
 public:
-    virtual void onAnimalNameChange(const std::string &oldName, const std::string &newName) = 0;
+    virtual void onNotifierNameChange(const std::string &oldName, const std::string &newName) = 0;
 
     virtual ~IObserver() = default;
 };
