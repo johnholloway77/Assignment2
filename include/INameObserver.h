@@ -3,17 +3,23 @@
 // Copyright (c) [2024] John Holloway. All Rights Reserved.
 //
 
-#ifndef ASSIGN2_IOBSERVER_H
-#define ASSIGN2_IOBSERVER_H
+#ifndef ASSIGN2_INAMEOBSERVER_H
+#define ASSIGN2_INAMEOBSERVER_H
 
 #include <iostream>
 
-class IObserver {
+#ifdef __linux__
+#include <memory>
+#include <vector>
+
+#endif
+
+class INameObserver {
 public:
     virtual void onNotifierNameChange(const std::string &oldName, const std::string &newName) = 0;
 
-    virtual ~IObserver() = default;
+    virtual ~INameObserver() = default;
 };
 
-#endif //ASSIGN2_IOBSERVER_H
+#endif //ASSIGN2_INAMEOBSERVER_H
 

@@ -8,7 +8,14 @@
 
 #include <iostream>
 
+#ifdef __linux__
+#include <memory>
+#include <vector>
+#include <unordered_map>
+#endif
+
 #include "Client.h"
+
 
 class Clients {
 private:

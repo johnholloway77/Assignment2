@@ -8,9 +8,16 @@
 
 #include <iostream>
 
+#ifdef __linux__
+#include <memory>
+#include <vector>
+#include <unordered_map>
+#endif
+
 #include "Mammal.h"
 
-class Client : public IObserver, public std::enable_shared_from_this<Client> {
+
+class Client : public INameObserver, public std::enable_shared_from_this<Client> {
 private:
     int phoneNumber_;
     std::string name_;

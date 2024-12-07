@@ -8,10 +8,14 @@
 
 #include <iostream>
 #include <string>
-#include "IObserver.h"
-#include "INotifier.h"
+#include "INameObserver.h"
+#include "INameChangeNotifier.h"
 
-class BaseAnimal : public INotifier {
+#ifdef __linux__
+#include <memory>
+#endif
+
+class BaseAnimal : public INameChangeNotifier {
 public:
 
 
@@ -23,7 +27,7 @@ public:
 
     const std::string &getName() const;
 
-    void addIObserver(std::weak_ptr<IObserver> i_observer);
+    void addIObserver(std::weak_ptr<INameObserver> i_NameObserver);
 
     void notifyIObserverNameChange(const std::string &oldName, const std::string &newName);
 
@@ -34,7 +38,7 @@ protected:
     std::string name_;
     std::string breed_;
     int birthYear_;
-    std::vector<std::weak_ptr<IObserver>> i_observers_;
+    std::vector<std::weak_ptr<INameObserver>> i_NameObservers_;
 
     BaseAnimal(const std::string &name, const std::string &breed, int birthYear)
             : name_(name), breed_(breed), birthYear_(birthYear) {}

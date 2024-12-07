@@ -25,19 +25,19 @@ int BaseAnimal::getBirthYear() const {
     return birthYear_;
 }
 
-void BaseAnimal::addIObserver(std::weak_ptr<IObserver> i_observer) {
-    i_observers_.push_back(i_observer);
+void BaseAnimal::addIObserver(std::weak_ptr<INameObserver> i_NameObserver) {
+    i_NameObservers_.push_back(i_NameObserver);
 }
 
 void BaseAnimal::notifyIObserverNameChange(const std::string &oldName, const std::string &newName) {
-    for (auto iterator = i_observers_.begin();
-         iterator != i_observers_.end();) {
+    for (auto iterator = i_NameObservers_.begin();
+         iterator != i_NameObservers_.end();) {
 
         if (auto i_observer = iterator->lock()) {
             i_observer->onNotifierNameChange(oldName, newName);
             iterator++;
         } else {
-            iterator = i_observers_.erase(iterator);
+            iterator = i_NameObservers_.erase(iterator);
 
         }
     }

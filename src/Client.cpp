@@ -28,7 +28,7 @@ void Client::addAnimalToNameMap(std::shared_ptr<BaseAnimal> animal) {
 
 void Client::addAnimalToVector(std::shared_ptr<BaseAnimal> animal) {
 
-    std::weak_ptr<IObserver> clientWeakPointer = shared_from_this();
+    std::weak_ptr<INameObserver> clientWeakPointer = shared_from_this();
 
     animal->addIObserver(clientWeakPointer);
     animals_.push_back(animal);
