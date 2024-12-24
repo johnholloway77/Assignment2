@@ -13,7 +13,7 @@ Through the use of macros, I was able to have the different colour, marking and 
 entered in one spot, where more can easily be added or removed. Changing the macro will automatically add or remove
 other lines in the rest of the header files
 
-fter cloning the repository, navigate to the downloaded directory and run:
+After cloning the repository, navigate to the downloaded directory and run:
 
 ```bash
 make compile
